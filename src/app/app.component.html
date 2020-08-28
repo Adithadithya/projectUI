@@ -1,19 +1,19 @@
 
-  <h1 class="main-form">assignment</h1>
-    <form [formGroup]="form" class="main-form" autocomplete="off" (ngSubmit)="onSubmit()">
+  <h1 class="main-form">Assignment</h1>
+    <form [formGroup]="form" class="main-form formDiv" autocomplete="off" (ngSubmit)="onSubmit()">
       <div class="row" >
         <div class="col">
           <div class="form-group">
             <label for="FirstName">First Name</label>
             <input type="text" class="form-control" id="FirstName"  formControlName="firstName" aria-describedby="FirstNameError" placeholder="Enter First Name">
-            <small id="FirstNameError" class="form-text text-muted">First Name Is Required</small>
+            <small id="FirstNameError" *ngIf="hasError('firstName', 'required')"  class="form-text text-muted">First Name Is Required</small>
           </div>
       </div>
       <div class="col">
         <div class="form-group">
           <label for="lastName">Last Name</label>
           <input type="text" class="form-control" id="lastName"  required formControlName="lastName"  aria-describedby="lastNameError" placeholder="Enter Last Name">
-          <small id="lastNameError" class="form-text text-muted">Last Name Is Required</small>
+          <small id="lastNameError" *ngIf="hasError('lastName', 'required')" class="form-text text-muted">Last Name Is Required</small>
         </div>
       </div>
       </div>
@@ -23,24 +23,44 @@
       <div class="form-group">
         <label for="exampleInputEmail1">Email address</label>
         <input type="email" class="form-control" id="exampleInputEmail1" required formControlName="emailID"  aria-describedby="emailHelp" placeholder="Enter email">
-        <small id="emailHelp" class="form-text text-muted">Email Id Is Required.</small>
+        <small id="emailHelp" *ngIf="hasError('emailID', 'required')"  class="form-text text-muted">Email Id Is Required.</small>
       </div>
      
       <div class="form-group">
         <label for="ContactNo">Phone number</label>
         <input type="number" class="form-control" id="ContactNo"  required formControlName="contactNo" aria-describedby="contactError" formControlName="contactNo" placeholder="Enter Phone Number">
-        <small id="contactError" class="form-text text-muted">Contact Number Is Required</small>
+        <small id="contactError" *ngIf="hasError('contactNo', 'required')"  class="form-text text-muted">Contact Number Is Required</small>
       </div>
      
       <div class="form-group">
         <label for="imageProfile">Profile Image</label>
-        <input type="file" class="form-control" id="imageProfile"  required formControlName="image" aria-describedby="imageProfileError" placeholder="Select Profile Image">
-        <small id="imageProfileError" class="form-text text-muted">Please add profile Image</small>
+        <input type="file" class="form-control" id="imageProfile"  formControlName="image" aria-describedby="imageProfileError" placeholder="Select Profile Image">
       </div>
      
      <div class="form-group">
       <button class="btn btn-success" type="submit ">Submit</button>
      </div>
      </form>
+
+
+
+
+     <h4>Available Users</h4>
+     <table class="table">
+    <tr>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Email</th>
+      <th>Contact No</th>
+
+    </tr>
+       <tr *ngFor="let user of users" >
+         <td>{{user.firstName}}</td>
+         <td>{{user.lastName}}</td>
+         <td>{{user.emailID}}</td>
+         <td>{{user.contactNo}}</td>
+
+        </tr>
+     </table>
 
  

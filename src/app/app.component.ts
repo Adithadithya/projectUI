@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators } from "@angular/forms";
+import {UsersService} from "./users.service"
 
 
 @Component({
@@ -10,27 +11,44 @@ import { FormControl, FormGroup, FormBuilder, Validators } from "@angular/forms"
 export class AppComponent implements OnInit {
   title = 'Assignment';
   form: FormGroup
-  constructor(    public fb: FormBuilder
+  users:any;
+  constructor(    public fb: FormBuilder,
+    public userService: UsersService
     ){
   }
 
 
   ngOnInit(): void {
+    this.users=[];
+  
+this.loadUsers();
+
  this.form = this.fb.group({
       firstName: ['',Validators.required],
       lastName: ['',Validators.required],
       emailID:['',Validators.required],
       contactNo:['',Validators.required],
-      image:['',Validators.required]
+      image:['']
     });
   }
+loadUsers(){
+  this.userService.getUsers().subscribe((data: any) => {
+    console.log("data",data);
 
+    this.users = data;
+    
+  })
+}
   onSubmit(){
     console.log(this.form.getRawValue());
     
     if(this.form.valid)
     {
       console.log("Add data added");
+      this.userService.insertUser(this.form.getRawValue()).subscribe((data: any) => {
+        console.log("data",data);
+        this.loadUsers();
+      })
     }
   }
 

@@ -6,3 +6,12 @@
 .center {
     align-content: center;
 }
+body{
+    background-color: #f4f4e163 !important;
+}
+.formDiv{
+    background-color: white;
+    padding: 25px;
+    border: 1px solid #d7cbcb;
+    border-radius: 18px;
+}
